@@ -1,18 +1,17 @@
 package com.virtualpairprogrammers.tracker.messaging;
 
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.util.Date;
-import java.util.Map;
-
+import com.virtualpairprogrammers.tracker.data.Data;
+import com.virtualpairprogrammers.tracker.domain.VehicleBuilder;
+import com.virtualpairprogrammers.tracker.domain.VehiclePosition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
-import com.virtualpairprogrammers.tracker.data.Data;
-import com.virtualpairprogrammers.tracker.domain.VehicleBuilder;
-import com.virtualpairprogrammers.tracker.domain.VehiclePosition;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.util.Date;
+import java.util.Map;
 
 @Component
 public class MessageProcessor {
@@ -33,7 +32,8 @@ public class MessageProcessor {
 				                          .withLat(new BigDecimal(incomingMessage.get("lat")))
 				                          .withLng(new BigDecimal(incomingMessage.get("long")))
 				                          .withTimestamp(convertedDatestamp)
-				                          .build();
+				                          .withSpeed(BigDecimal.valueOf(47.5))
+											.build();
 				                          
 		data.updatePosition(newReport);
 	}
